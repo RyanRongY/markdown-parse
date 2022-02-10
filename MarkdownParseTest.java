@@ -34,7 +34,7 @@ public class MarkdownParseTest {
 
         for (int i = 0; i < 8; i++) {
             String file = load("markdown" + (i + 1) + ".md");
-            assertEquals(list[i],MarkdownParse.getLinks(file));
+            assertEquals(list[i], MarkdownParse.getLinks(file));
         }
     }
 
