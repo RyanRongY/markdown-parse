@@ -6,8 +6,14 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
-
+import java.util.List;
 public class MarkdownParseTest {
+    private String load(String words) throws IOException {
+		Path fileName = Path.of(words);
+	    String contents = Files.readString(fileName);
+        return contents;
+    }
+    
     @Test
     public void addition() {
         assertEquals(2, 1 + 1);
@@ -37,10 +43,31 @@ public class MarkdownParseTest {
             assertEquals(list[i], MarkdownParse.getLinks(file));
         }
     }
+    @Test
+    public void snippet1() throws IOException {
 
-    private String load(String words) throws IOException {
-		Path fileName = Path.of(words);
-	    String contents = Files.readString(fileName);
-        return contents;
+        Path fileName = Path.of("Snippet1.md");
+        String contents = Files.readString(fileName);
+
+
+        assertEquals(List.of("`"),MarkdownParse.getLinks(contents) );
+    }
+    @Test
+    public void snippet2() throws IOException {
+
+        Path fileName = Path.of("Snippet2.md");
+        String contents = Files.readString(fileName);
+
+
+        assertEquals(List.of("a.com","a.com(())","example.com"),MarkdownParse.getLinks(contents) );
+    }
+    @Test
+    public void snippet3() throws IOException {
+
+        Path fileName = Path.of("Snippet3.md");
+        String contents = Files.readString(fileName);
+
+
+        assertEquals(List.of("https://ucsd-cse15l-w22.github.io/"),MarkdownParse.getLinks(contents) );
     }
 }
